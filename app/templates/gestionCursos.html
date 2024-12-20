@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+      {% load static %}
+      <title>{{ titulo }}</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <link rel="stylesheet" href="{% static 'css/gestionCursos.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-success bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">ORM CRUD DJANGO</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expande>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contacto</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+     <div class="container py-4">
+         <div class="row">
+           <div class="col-md-4">
+                <h2>Gestionde Curso</h2>
+                    <div class=="card">
+                        <div class="card-body">
+                            <form id="formularioCurso" action="/registrarCurso/" method="POST">{% csrf_token %}
+                                <div class="form-group">
+                                  <input type="text" id="txtNombre" name="txtNombre" class="form-control" minlength="3" maxlength="30" placeholder="Nombre" autofocus >
+                                </div>
+                                <div class="form-group">
+                                  <input type="number" id="numCreditos"name="numCreditos" class="form-control" min="1" max="10" step="1" value="1" required>
+                                </div>
+    <div class="form-group">
+        <label for="nuevoDocente">Ingresar docente</label>
+        <input type="text" id="nuevoDocente" name="nuevoDocente" class="form-control" placeholder="Ingrese el nombre">
+    </div>
+                                <div class="form-group">
+                                  <input type="submit" class="btn btn-success w-100 text-white" value="Guardar">
+				</div>
+				 <!-- Codigo de agregacion para docente  <div>....</div> 
+                                <div class="form-group">
+                                   <label for="docente">Seleccione Docente</label>
+                                   <select id="docente" name="docente" class="form-control" >
+                                    <option value="" disabled selected>-- Seleccione un docente --</option>
+                                     {% for d in docentes %}
+                                     <option value="{{ d.id }}">{{ d.nombre }}</option>
+                                     {% endfor %}
+                                    </select>
+                                 </div>
+				     Ingresar nuevo docente -->
+
+                            </form>
+                        </div>
+                   </div>
+              <!--Se agregara un lsitado docente INICIO <div></div>-->
+
+              <!--FIN-->
+           </div>
+             <div class="col-md-8">
+                <h2>Listado de Cursos</h2>
+                 <div class="table-responsive">
+                     <table class="table table-striped">
+                            <thead>
+                                 <tr>
+                                     <th class="centrado"> #</th>
+                                     <th class="centrado"> Curso</th>
+                                     <th class="centrado"> Cr&eacute;ditos</th>
+                                    <!-- Muestra el centrado del docente (agregacion) -->
+                                     <th class="centrado">Docente</th>
+                                     <th class="centrado"colspan="2">Opciones</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 {% for c in object_list %}
+                                 <tr>
+                                     <td>{{forloop.counter}}</td>
+                                     <td>{{c.nombre}}</td>
+                                     <td>{{c.creditos}}</td>
+				     <td>{{ c.docente.nombre }}</td> <!-- Muestra el nombre del docente -->
+                                     <td><a href="edicionCurso/{{c.id}}" class="btn btn-block btn-info">Editar</a></td>
+                                     <td><a href="eliminacionCurso/{{c.id}}" class="btn btn-block btn-danger btnEliminacion">Eliminar</a></td>
+                                 </tr>
+                                 {% endfor %}
+                             </tbody>
+                      </table>
+                 </div>
+              <!--Se agregara un lsitado docente INICIO <div></div>
+<div class="col-md-12 mt-5">
+  <h2>Listado de Docentes</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="centrado">#</th>
+          <th class="centrado">Docente</th>
+          <th class="centrado">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in docentes %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ d.nombre }}</td>
+          <td><a href="eliminarDocente/{{ d.id }}" class="btn btn-block btn-danger btnEliminacion">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+              <!--FIN-->
+             </div>
+         </div>
+      </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="{% static 'js/gestionCursos.js' %}"></script>
+</body>	
+</html>

@@ -1,0 +1,34 @@
+# Ignorar archivos compilados de Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignorar la base de datos SQLite
+db.sqlite3
+
+# Ignorar configuraciones específicas del entorno virtual
+*.env
+venv/
+myenv/
+
+# Ignorar archivos estáticos generados automáticamente
+staticfiles/
+media/
+
+# Ignorar archivos específicos de sistemas operativos
+*.DS_Store
+Thumbs.db
+
+# Ignorar archivos de configuración de IDEs
+.vscode/
+.idea/
+
+# Ignorar logs
+*.log
+
+# Ignorar migraciones compiladas
+app/migrations/__pycache__/
+
+# Ignorar archivos CSS y JS generados que no sean necesarios subir (opcional)
+app/static/css/*.css
+app/static/js/*.js
